@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="chatjs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat.js</title>
+</head>
+
+<body ng-controller="mainController">
+    <h1>Welcome! {{ message }}</h1>
+    <h3>Write a message!</h3>
+    <form action="/" method="POST">
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <button ng-click="getMessages()">SQL Test</button>
+
+    <script src="lib/angularjs/angular.min.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/maincontroller.js"></script>
+</body>
+
+</html>
