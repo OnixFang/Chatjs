@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
+const database = require('./controllers/chatjs-database.js');
 
 // Server variables
 const rootPath = path.normalize(__dirname + './../');
@@ -16,55 +16,16 @@ app.use(bodyParser.json());
 app.use(express.static(appDir));
 
 // MySQL Connection
-const con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "chatjs"
-});
-
-con.connect(function (err) {
-    if (err) {
-        throw err;
-    } else {
-        console.log('MySQL Database Succssful!');
-    }
-});
+database.connect();
 
 // Routes
 app.get('/', function (req, res) {
     res.sendFile(appDir + 'index.html');
 });
 
-app.get('/getMessages', function (req, res) {
-    console.log('Attempting to get data from database...');
+app.get('/getMessages', database.getAllMessages);
 
-    const sql = "SELECT content FROM message";
-    con.query(sql, function (err, result) {
-        if (err) {
-            console.log("ERROR!");
-            throw err;
-        } else {
-            console.log("Data retrieval successful!")
-            res.send(result);
-        }
-    });
-});
-
-app.post('/', function (req, res) {
-    console.log('Inserting ' + req.body.message + ' to the database...');
-
-    const sql = "INSERT INTO message (content) VALUES ('" + req.body.message + "')";
-    con.query(sql, function (err) {
-        if (err) {
-            console.log("ERROR!");
-            throw err;
-        } else {
-            console.log('Data insertion successfull!');
-        }
-    });
-
-    res.sendFile(appDir + 'index.html');
-});
+app.post('/', database.saveMessage);
 
 // Server launch
 app.listen(port);
