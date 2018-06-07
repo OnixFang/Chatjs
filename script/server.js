@@ -7,7 +7,7 @@ const database = require('./controllers/chatjs-database.js');
 // Server variables
 const rootPath = path.normalize(__dirname + './../');
 const appDir = path.normalize(rootPath + '/app/');
-const port = 8012;
+const port = 80;
 const app = express();
 
 // Express app configuration
