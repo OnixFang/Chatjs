@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body {
+    background: beige;
+}
+
 .input-box {
     position: fixed;
     bottom: 0px;
@@ -37,5 +41,4 @@
     height: 100%;
     margin-bottom: 30px;
     padding-bottom: 10px;
-    background: beige;
 }
