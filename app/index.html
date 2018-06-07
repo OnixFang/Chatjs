@@ -6,24 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Chat.js</title>
+
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 
 <body ng-controller="mainController">
-    <h1>Welcome! {{ message }}</h1>
-    <h3>Write a message!</h3>
-    <form action="/" method="POST">
-        <label for="author">Author:</label>
-        <input type="text" name="author" id="author">
-        <br>
-        <br>
-        <label for="content">Message:</label>
-        <br>
-        <textarea name="content" id="content" cols="30" rows="10"></textarea>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-    <br>
-    <button ng-click="getMessages()">SQL Test</button>
+    <div class="chat-box">
+        <h1>Welcome!</h1>
+        <h3>Write a message!</h3>
+    </div>
+
+    <div class="input-box">
+        <form action="/" method="POST">
+            <input class="username-box" type="text" name="author" id="author" placeholder="username">
+            <input class="message-box" type="text" name="content" id="content" placeholder="Message...">
+            <button class="send-btn" type="submit">Send</button>
+        </form>
+    </div>
 
     <script src="lib/angularjs/angular.min.js"></script>
     <script src="scripts/app.js"></script>
