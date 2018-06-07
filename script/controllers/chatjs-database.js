@@ -22,11 +22,11 @@ function endConnection() {
 
 function getAllMessages(req, res) {
     console.log("Retrieving all messages...");
-    const sql = "SELECT content FROM message";
+    const sql = "SELECT author, content FROM message";
 
     con.query(sql, function (err, result) {
         if (err) {
-            console.log("ERROR!");
+            console.log("ERROR GETTING MESSAGES!");
             throw err;
         } else {
             console.log("Data retrieval successful!")
@@ -37,17 +37,17 @@ function getAllMessages(req, res) {
 
 function saveMessage(req, res) {
     console.log('Inserting ' + req.body.message + ' to the database...');
-    const sql = "INSERT INTO message (content) VALUES ('" + req.body.message + "')";
+    const sql = "INSERT INTO message (author, content) VALUES ('" + req.body.author + "', '" + req.body.content + "')";
 
     con.query(sql, function (err) {
         if (err) {
-            console.log("ERROR!");
+            console.log("ERROR SAVING MESSAGE!");
             throw err;
         } else {
             console.log('Data insertion successfull!');
         }
     });
-    res.redirect('/index.html');
+    res.redirect('/');
 }
 
 module.exports = {
