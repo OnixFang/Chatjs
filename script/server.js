@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const database = require('./controllers/chatjs-database.js');
+const users = require('./controllers/usercontroller.js');
 
 // Server variables
 const rootPath = path.normalize(__dirname + './../');
@@ -24,8 +25,8 @@ app.get('*', function (req, res) {
 });
 
 // API
-app.get('/getMessages', database.getAllMessages);
-app.post('/', database.saveMessage);
+app.get('/user/:id', users.get);
+app.post('/user', users.save);
 
 // Server launch
 app.listen(port);
