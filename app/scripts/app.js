@@ -10,8 +10,10 @@
             controller: 'MainController'
         })
         .when('/login', {
-            templateUrl: 'templates/login.html',
-            controller: 'MainController'
+            templateUrl: 'templates/login.html'
+        })
+        .when('/register', {
+            templateUrl: 'templates/register.html'
         })
         .otherwise('/chat', {
             templateUrl: 'templates/chat.html',
