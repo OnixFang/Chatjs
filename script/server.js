@@ -18,13 +18,13 @@ app.use(express.static(appDir));
 // MySQL Connection
 database.connect();
 
-// Routes
-app.get('/', function (req, res) {
+// Default Page
+app.get('*', function (req, res) {
     res.sendFile(appDir + 'index.html');
 });
 
+// API
 app.get('/getMessages', database.getAllMessages);
-
 app.post('/', database.saveMessage);
 
 // Server launch

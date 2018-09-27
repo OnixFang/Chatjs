@@ -11,7 +11,7 @@ function connect() {
         if (err) {
             throw err;
         } else {
-            console.log('MySQL ChatJS Database Succssful!');
+            console.log('ChatJS database connection succssful!');
         }
     });
 }
@@ -22,7 +22,7 @@ function endConnection() {
 
 function getAllMessages(req, res) {
     console.log("Retrieving all messages...");
-    const sql = "SELECT author, content FROM message";
+    const sql = "SELECT * FROM messages;";
 
     con.query(sql, function (err, result) {
         if (err) {

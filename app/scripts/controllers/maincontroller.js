@@ -1,7 +1,7 @@
 (function () {
     const app = angular.module('chatjs');
 
-    function mainController($scope, $http) {
+    function MainController($scope, $http) {
         $scope.message = "I am working!";
 
         $scope.getMessages = function getMessages() {
@@ -14,5 +14,5 @@
         }
     }
 
-    app.controller('mainController', mainController);
+    app.controller('MainController', MainController);
 }());
