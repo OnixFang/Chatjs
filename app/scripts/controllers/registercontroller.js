@@ -2,22 +2,29 @@
     const app = angular.module('chatjs');
 
     function registerController($scope, authentication) {
+        let user = {
+            firstname: null,
+            lastname: null,
+            username: null,
+            password: null,
+        };
+
         $scope.register = function register() {
-            let user = {
+            user = {
                 firstname: $scope.firstname,
                 lastname: $scope.lastname,
                 username: $scope.username,
-                password: CryptoJS.AES.encrypt($scope.password, "ChatJS Password").toString()
-            }
+                password: CryptoJS.AES.encrypt($scope.password, 'ChatJS Password').toString(),
+            };
 
-            console.log("Successfully saved the following object into database:");
+            console.log('Successfully saved the following object into database:');
             console.log(user);
-        }
+        };
 
-        let yuser = {}
+        const yuser = {};
         $scope.test = function test() {
-            authentication.saveUser(yuser)
-        }
+            authentication.saveUser(yuser);
+        };
     }
 
     app.controller('registerController', registerController);

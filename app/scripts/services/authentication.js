@@ -15,8 +15,8 @@
 
         return {
             getUser: getUser,
-            saveUser: saveUser
-        }
+            saveUser: saveUser,
+        };
     }
 
     app.factory('authentication', authentication);
