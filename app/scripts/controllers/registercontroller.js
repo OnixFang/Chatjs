@@ -20,11 +20,6 @@
             console.log('Successfully saved the following object into database:');
             console.log(user);
         };
-
-        const yuser = {};
-        $scope.test = function test() {
-            authentication.saveUser(yuser);
-        };
     }
 
     app.controller('registerController', registerController);
