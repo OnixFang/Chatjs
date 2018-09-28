@@ -31,3 +31,4 @@ app.post('/user', users.save);
 // Server launch
 app.listen(port);
 console.log('Listening on port:' + port);
+console.log('http://localhost:' + port);
