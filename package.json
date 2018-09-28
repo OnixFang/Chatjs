@@ -18,5 +18,13 @@
   "keywords": [
     "chat",
     "js"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OnixFang/Chatjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OnixFang/Chatjs/issues"
+  },
+  "homepage": "https://github.com/OnixFang/Chatjs#readme"
 }

@@ -5,22 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="/">
     <title>Chat.js</title>
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+
+    <!-- Scripts -->
+    <script src="lib/crypto.js"></script>
+
+    <!-- AngularJS Scripts -->
+    <script src="lib/angularjs/angular.min.js"></script>
+    <script src="lib/angularjs/angular-route.min.js"></script>
+    <script src="lib/angularjs/angular-resource.min.js"></script>
+    <script src="scripts/app.js"></script>
+
+    <!-- AngularJS Controllers -->
+    <script src="scripts/controllers/maincontroller.js"></script>
+    <script src="scripts/controllers/logincontroller.js"></script>
+    <script src="scripts/controllers/registercontroller.js"></script>
+
+    <!-- AngularJS Services -->
+    <script src="scripts/services/authentication.js"></script>
 </head>
 
-<body ng-controller="mainController">
-    <h1>Welcome! {{ message }}</h1>
-    <h3>Write a message!</h3>
-    <form action="/" method="POST">
-        <textarea name="message" id="message" cols="30" rows="10"></textarea>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-    <button ng-click="getMessages()">SQL Test</button>
-
-    <script src="lib/angularjs/angular.min.js"></script>
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/maincontroller.js"></script>
+<body>
+    <div>
+        <nav class="navbar fixed-top navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">
+                <span style="color: aliceblue">Chat</span>
+                <span style="color: aqua">JS</span>
+            </a>
+            <div class="d-flex">
+                <a class="text-white" href="/login">Log In</a>
+                <span style="color: white">&nbsp;|&nbsp;</span>
+                <a class="text-white" href="/register">Register</a>
+            </div>
+            </ul>
+        </nav>
+        <div style="margin-top: 3.8em" ng-view></div>
+    </div>
 </body>
 
 </html>

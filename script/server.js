@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const database = require('./controllers/chatjs-database.js');
+const users = require('./controllers/usercontroller.js');
 
 // Server variables
 const rootPath = path.normalize(__dirname + './../');
@@ -18,14 +19,14 @@ app.use(express.static(appDir));
 // MySQL Connection
 database.connect();
 
-// Routes
-app.get('/', function (req, res) {
+// Default Page
+app.get('*', function (req, res) {
     res.sendFile(appDir + 'index.html');
 });
 
-app.get('/getMessages', database.getAllMessages);
-
-app.post('/', database.saveMessage);
+// API
+app.get('/user/:id', users.get);
+app.post('/user', users.save);
 
 // Server launch
 app.listen(port);
