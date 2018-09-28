@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 
 const con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "chatjs"
+    host: 'localhost',
+    user: 'root',
+    database: 'chatjs',
 });
 
 function connect() {
@@ -16,10 +16,6 @@ function connect() {
     });
 }
 
-function endConnection() {
-    con.end();
-}
-
 module.exports = {
-    connect: connect
-}
+    connect: connect,
+};

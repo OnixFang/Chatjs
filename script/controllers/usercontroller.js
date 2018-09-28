@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 
 const con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "chatjs"
+    host: 'localhost',
+    user: 'root',
+    database: 'chatjs',
 });
 
 function connect() {
@@ -17,15 +17,15 @@ function connect() {
 }
 
 function get(req, res) {
-    console.log("Retrieving user...");
-    const sql = "SELECT * FROM users WHERE id=" + req.body.id + ";";
+    console.log('Retrieving user...');
+    const sql = 'SELECT * FROM users WHERE id=' + req.body.id + ';';
 
     con.query(sql, function (err, result) {
         if (err) {
-            console.log("ERROR GETTING MESSAGES!");
+            console.log('ERROR GETTING MESSAGES!');
             throw err;
         } else {
-            console.log("Data retrieval successful!")
+            console.log('Data retrieval successful!');
             res.send(result);
         }
     });
@@ -37,7 +37,7 @@ function save(req, res) {
 
     con.query(sql, function (err) {
         if (err) {
-            console.log("ERROR SAVING MESSAGE!");
+            console.log('ERROR SAVING MESSAGE!');
             throw err;
         } else {
             console.log('Data insertion successfull!');
@@ -49,5 +49,5 @@ function save(req, res) {
 module.exports = {
     connect: connect,
     get: get,
-    save: save
-}
+    save: save,
+};
