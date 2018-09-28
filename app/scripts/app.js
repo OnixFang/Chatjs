@@ -1,4 +1,4 @@
-(function () {
+(() => {
     const app = angular.module('chatjs', ['ngRoute', 'ngResource']);
 
     function routes($routeProvider, $locationProvider) {
@@ -23,4 +23,4 @@
     }
 
     app.config(routes);
-}());
+})();

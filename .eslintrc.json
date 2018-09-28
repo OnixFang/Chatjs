@@ -5,8 +5,6 @@
         "CryptoJS": true
     },
     "rules": {
-        "func-names": 0,
-        "prefer-arrow-callback": 0,
         "no-console": 0,
         "prefer-template": 0,
         "no-path-concat": 0,

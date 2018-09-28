@@ -1,4 +1,4 @@
-(function () {
+(() => {
     const app = angular.module('chatjs');
 
     function authentication($resource) {
@@ -20,4 +20,4 @@
     }
 
     app.factory('authentication', authentication);
-}());
+})();

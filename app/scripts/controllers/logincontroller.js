@@ -1,4 +1,4 @@
-(function () {
+(() => {
     const app = angular.module('chatjs');
 
     function loginController($scope) {
@@ -6,4 +6,4 @@
     }
 
     app.controller('loginController', loginController);
-}());
+})();
