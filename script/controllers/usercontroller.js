@@ -37,12 +37,13 @@ function save(req, res) {
 
     con.query(sql, (err) => {
         if (err) {
-            console.log('ERROR SAVING USER');
+            console.log('ERROR SAVING USER: ' + err.message);
+            res.status(500);
+            res.send(err.message);
         } else {
             console.log('Data insertion successfull!');
         }
     });
-    res.redirect('/login');
 }
 
 module.exports = {

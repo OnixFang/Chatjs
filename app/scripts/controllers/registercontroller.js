@@ -1,7 +1,7 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function registerController($scope, $window, authentication) {
+    function registerController($scope, $location, authentication) {
         const user = {
             firstname: null,
             lastname: null,
@@ -9,20 +9,19 @@
             password: null,
         };
 
-        $scope.register = function register() {
+        function register() {
             user.firstname = $scope.firstname;
             user.lastname = $scope.lastname;
             user.username = $scope.username.toLowerCase();
             user.password = CryptoJS.AES.encrypt($scope.password, 'ChatJS Password').toString();
 
+            console.log('User object to register:');
             console.log(user);
-            try {
-                authentication.saveUser(user);
-                console.log('Registration completed successfully.');
-            } catch (error) {
-                $window.alert('Could not register user.');
-            }
-        };
+
+            authentication.saveUser(user);
+        }
+
+        $scope.register = register;
     }
     app.controller('registerController', registerController);
 })();
