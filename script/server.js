@@ -25,7 +25,7 @@ app.get('*', (req, res) => {
 });
 
 // API
-app.get('/user/:id', users.get);
+app.get('/user', users.get);
 app.post('/user', users.save);
 
 // Server launch

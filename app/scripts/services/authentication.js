@@ -3,10 +3,10 @@
 
     function authentication($resource) {
         // API resource path for user data
-        const resource = $resource('/user/:id', { id: '@id' });
+        const resource = $resource('/user');
 
-        function getUser(userId) {
-            return resource.get({ id: userId });
+        function login(credentials) {
+            return resource.get(credentials);
         }
 
         function saveUser(user) {
@@ -14,7 +14,7 @@
         }
 
         return {
-            getUser: getUser,
+            login: login,
             saveUser: saveUser,
         };
     }

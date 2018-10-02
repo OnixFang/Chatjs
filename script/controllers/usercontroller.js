@@ -8,7 +8,7 @@ const con = mysql.createConnection({
 
 function get(req, res) {
     console.log('Retrieving user...');
-    const sql = 'SELECT * FROM users WHERE id=' + req.body.id + ';';
+    const sql = 'SELECT * FROM users WHERE username=' + req.body.username + ';';
 
     con.query(sql, (err, result) => {
         if (err) {
