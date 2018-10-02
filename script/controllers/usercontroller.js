@@ -6,17 +6,6 @@ const con = mysql.createConnection({
     database: 'chatjs',
 });
 
-function connect() {
-    con.connect((err) => {
-        if (err) {
-            console.log('ERROR CONNECTING TO DATABASE');
-            throw err;
-        } else {
-            console.log('ChatJS database connection succssful!');
-        }
-    });
-}
-
 function get(req, res) {
     console.log('Retrieving user...');
     const sql = 'SELECT * FROM users WHERE id=' + req.body.id + ';';
@@ -47,7 +36,6 @@ function save(req, res) {
 }
 
 module.exports = {
-    connect: connect,
     get: get,
     save: save,
 };
