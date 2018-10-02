@@ -1,4 +1,4 @@
-(function () {
+(() => {
     const app = angular.module('chatjs', ['ngRoute', 'ngResource']);
 
     function routes($routeProvider, $locationProvider) {
@@ -6,7 +6,7 @@
         $routeProvider
             .when('/chat', {
                 templateUrl: 'templates/chat.html',
-                controller: 'mainController',
+                controller: 'chatController',
             })
             .when('/login', {
                 templateUrl: 'templates/login.html',
@@ -18,9 +18,9 @@
             })
             .otherwise('/chat', {
                 templateUrl: 'templates/chat.html',
-                controller: 'mainController',
+                controller: 'chatController',
             });
     }
 
     app.config(routes);
-}());
+})();

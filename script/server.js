@@ -20,7 +20,7 @@ app.use(express.static(appDir));
 database.connect();
 
 // Default Page
-app.get('*', function (req, res) {
+app.get('*', (req, res) => {
     res.sendFile(appDir + 'index.html');
 });
 

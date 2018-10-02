@@ -1,26 +1,28 @@
-(function () {
+(() => {
     const app = angular.module('chatjs');
 
-    function registerController($scope, authentication) {
-        let user = {
+    function registerController($scope, $location, $window, authentication) {
+        const user = {
             firstname: null,
             lastname: null,
             username: null,
             password: null,
         };
 
-        $scope.register = function register() {
-            user = {
-                firstname: $scope.firstname,
-                lastname: $scope.lastname,
-                username: $scope.username,
-                password: CryptoJS.AES.encrypt($scope.password, 'ChatJS Password').toString(),
-            };
+        $scope.register = () => {
+            user.firstname = $scope.firstname;
+            user.lastname = $scope.lastname;
+            user.username = $scope.username.toLowerCase();
+            user.password = CryptoJS.AES.encrypt($scope.password, 'ChatJS Password').toString();
 
-            console.log('Successfully saved the following object into database:');
-            console.log(user);
+            authentication.saveUser(user).$promise
+                .then(() => {
+                    $window.alert('Register successful');
+                    $location.path('/login');
+                }, (error) => {
+                    $window.alert('Error registering your user: ' + error.data);
+                });
         };
     }
-
     app.controller('registerController', registerController);
-}());
+})();
