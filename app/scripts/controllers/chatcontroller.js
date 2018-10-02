@@ -1,9 +1,9 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function mainController($scope) {
+    function chatController($scope) {
         $scope.message = 'This is working';
     }
 
-    app.controller('mainController', mainController);
+    app.controller('chatController', chatController);
 })();

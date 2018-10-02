@@ -6,7 +6,7 @@
         $routeProvider
             .when('/chat', {
                 templateUrl: 'templates/chat.html',
-                controller: 'mainController',
+                controller: 'chatController',
             })
             .when('/login', {
                 templateUrl: 'templates/login.html',
@@ -18,7 +18,7 @@
             })
             .otherwise('/chat', {
                 templateUrl: 'templates/chat.html',
-                controller: 'mainController',
+                controller: 'chatController',
             });
     }
 
