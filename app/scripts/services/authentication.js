@@ -1,25 +1,16 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function authentication($http, $window) {
+    function authentication($resource) {
         // API resource path for user data
+        const resource = $resource('/user/:id', { id: '@id' });
+
         function getUser(userId) {
-            return $http.get('/user/' + userId)
-                .then((response) => {
-                    console.log('GET successful.');
-                    console.log(response);
-                }, (error) => {
-                    console.log('Error performing GET.');
-                    console.log(error);
-                });
+            return resource.get({ id: userId });
         }
 
         function saveUser(user) {
-            return $http.post('/user/', user)
-                .then(() => {
-                }, (error) => {
-                    $window.alert('Error registering your user: ' + error.data);
-                });
+            return resource.save(user);
         }
 
         return {
