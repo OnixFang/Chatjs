@@ -19,14 +19,14 @@ app.use(express.static(appDir));
 // MySQL Connection
 database.connect();
 
+// API
+app.get('/user/:username', users.get);
+app.post('/user', users.save);
+
 // Default Page
 app.get('*', (req, res) => {
     res.sendFile(appDir + 'index.html');
 });
-
-// API
-app.get('/user', users.get);
-app.post('/user', users.save);
 
 // Server launch
 app.listen(port);

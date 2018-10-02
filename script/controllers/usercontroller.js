@@ -8,16 +8,17 @@ const con = mysql.createConnection({
 
 function get(req, res) {
     console.log('Retrieving user...');
-    const sql = 'SELECT * FROM users WHERE username=' + req.body.username + ';';
+    console.log(req.body);
+    const sql = 'SELECT * FROM users WHERE username = "' + req.params.username + '";';
 
-    con.query(sql, (err, result) => {
+    con.query(sql, (err, rows) => {
         if (err) {
             console.log('ERROR GETTING USER');
             res.status(500);
             res.send(err.message);
         } else {
             console.log('Data retrieval successful!');
-            res.send(result);
+            res.send(rows);
         }
     });
 }

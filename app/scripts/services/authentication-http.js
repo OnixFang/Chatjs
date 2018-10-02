@@ -1,28 +1,17 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function authentication($http, $window, $location) {
-        function getUser(userId) {
-            return $http.get('/user/' + userId)
-                .then(() => {
-                    $location.path('/login');
-                }, (error) => {
-                    $window.alert('Error registering your user: ' + error.data);
-                });
+    function authentication($http) {
+        function login(username) {
+            return $http.get('/user/' + username);
         }
 
         function saveUser(user) {
-            return $http.post('/user/', user)
-                .then(() => {
-                    $window.alert('Register successful');
-                    $location.path('/login');
-                }, (error) => {
-                    $window.alert('Error registering your user: ' + error.data);
-                });
+            return $http.post('/user/', user);
         }
 
         return {
-            getUser: getUser,
+            login: login,
             saveUser: saveUser,
         };
     }
