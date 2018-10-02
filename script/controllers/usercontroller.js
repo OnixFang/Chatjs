@@ -13,6 +13,8 @@ function get(req, res) {
     con.query(sql, (err, result) => {
         if (err) {
             console.log('ERROR GETTING USER');
+            res.status(500);
+            res.send(err.message);
         } else {
             console.log('Data retrieval successful!');
             res.send(result);
@@ -31,6 +33,7 @@ function save(req, res) {
             res.send(err.message);
         } else {
             console.log('Data insertion successfull!');
+            res.send();
         }
     });
 }
