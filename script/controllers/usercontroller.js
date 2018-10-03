@@ -50,7 +50,7 @@ function authenticate(req, res) {
 
 function save(req, res) {
     console.log('Saving ' + req.body.username + ' in the database...');
-    const sql = "INSERT INTO users (username, password, firstname, lastname) VALUES ('" + req.body.username + "', '" + req.body.password + "', '" + req.body.fistname + "', '" + req.body.lastname + "');";
+    const sql = "INSERT INTO users (username, password, firstname, lastname) VALUES ('" + req.body.username + "', '" + req.body.password + "', '" + req.body.firstname + "', '" + req.body.lastname + "');";
 
     con.query(sql, (err) => {
         if (err) {
