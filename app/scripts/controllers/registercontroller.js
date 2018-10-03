@@ -13,7 +13,7 @@
             user.firstname = $scope.firstname;
             user.lastname = $scope.lastname;
             user.username = $scope.username.toLowerCase();
-            user.password = CryptoJS.AES.encrypt($scope.password, 'ChatJS Password');
+            user.password = CryptoJS.AES.encrypt($scope.password, 'ChatJS Password').toString();
 
             auth.saveUser(user).$promise
                 .then(() => {
