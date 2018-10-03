@@ -1,7 +1,7 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function registerController($scope, $location, $window, authentication) {
+    function registerController($scope, $location, $window, auth) {
         const user = {
             firstname: null,
             lastname: null,
@@ -15,7 +15,7 @@
             user.username = $scope.username.toLowerCase();
             user.password = CryptoJS.AES.encrypt($scope.password, 'ChatJS Password').toString();
 
-            authentication.saveUser(user).$promise
+            auth.saveUser(user).$promise
                 .then(() => {
                     $window.alert('Register successful');
                     $location.path('/login');
