@@ -1,7 +1,7 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function loginController($scope, $window, auth) {
+    function loginController($scope, $window, $location, auth, store) {
         $scope.login = () => {
             const credentials = {
                 username: $scope.username,
@@ -10,7 +10,8 @@
 
             auth.login(credentials)
                 .then((response) => {
-                    $window.localStorage.setItem('user', JSON.stringify(response.data));
+                    store.set('user', response.data);
+                    $location.path('/');
                 }, (error) => {
                     $window.alert('ERROR: ' + error.data);
                 });

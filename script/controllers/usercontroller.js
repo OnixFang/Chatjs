@@ -12,9 +12,7 @@ function authenticate(req, res) {
         username: req.body.username,
         password: CryptoJS.AES.decrypt(req.body.password, 'ChatJS Password').toString(CryptoJS.enc.Utf8),
     };
-    console.log('User credentials:');
-    console.log(userCredentials);
-    console.log('Retrieving user...');
+    console.log('Retrieving user from database...');
     console.log(req.body.username);
     const sql = 'SELECT * FROM users WHERE username = "' + userCredentials.username + '";';
 
@@ -37,7 +35,6 @@ function authenticate(req, res) {
                     firstname: rows[0].firstname,
                     lastname: rows[0].lastname,
                 };
-                console.log(user);
                 res.send(user);
             } else {
                 console.log('Wrong password!');
