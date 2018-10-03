@@ -1,18 +1,18 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function loginController($scope, auth) {
+    function loginController($scope, $window, auth) {
         $scope.login = () => {
             const credentials = {
                 username: $scope.username,
                 password: CryptoJS.AES.encrypt($scope.password, 'ChatJS Password').toString(),
             };
-            console.log(credentials);
+
             auth.login(credentials)
                 .then((response) => {
-                    console.log(response);
+                    $window.localStorage.setItem('user', JSON.stringify(response.data));
                 }, (error) => {
-                    console.log('ERROR: ' + error.data);
+                    $window.alert('ERROR: ' + error.data);
                 });
         };
     }
