@@ -1,10 +1,10 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function loginController($scope, authentication) {
+    function loginController($scope, auth) {
         $scope.login = () => {
-            console.log($scope.username);
-            authentication.login($scope.username)
+            console.log($scope.credentials);
+            auth.login($scope.credentials)
                 .then((response) => {
                     console.log(response);
                 }, (error) => {

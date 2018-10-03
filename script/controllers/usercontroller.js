@@ -6,19 +6,37 @@ const con = mysql.createConnection({
     database: 'chatjs',
 });
 
-function get(req, res) {
+function authenticate(req, res) {
     console.log('Retrieving user...');
-    console.log(req.body);
-    const sql = 'SELECT * FROM users WHERE username = "' + req.params.username + '";';
+    console.log(req.body.username);
+    const sql = 'SELECT * FROM users WHERE username = "' + req.body.username + '";';
 
     con.query(sql, (err, rows) => {
         if (err) {
             console.log('ERROR GETTING USER');
             res.status(500);
             res.send(err.message);
+        } else if (rows.length < 1) {
+            console.log('User not found!');
+            res.status(500);
+            res.send('User not found!');
         } else {
-            console.log('Data retrieval successful!');
-            res.send(rows);
+            console.log('User retrieved!');
+            console.log('Authenticating...');
+            if (req.body.password === rows[0].password) {
+                console.log('User authenticated!');
+                const user = {
+                    username: rows[0].username,
+                    firstname: rows[0].firstname,
+                    lastname: rows[0].lastname,
+                };
+                console.log(user);
+                res.send(user);
+            } else {
+                console.log('Wrong password!');
+                res.status(500);
+                res.send('Wrong password!');
+            }
         }
     });
 }
@@ -40,6 +58,6 @@ function save(req, res) {
 }
 
 module.exports = {
-    get: get,
+    authenticate: authenticate,
     save: save,
 };

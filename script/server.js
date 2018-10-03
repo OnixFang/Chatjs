@@ -20,7 +20,7 @@ app.use(express.static(appDir));
 database.connect();
 
 // API
-app.get('/user/:username', users.get);
+app.post('/authenticate', users.authenticate);
 app.post('/user', users.save);
 
 // Default Page
