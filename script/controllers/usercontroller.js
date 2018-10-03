@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const CryptoJS = require('crypto-js');
 
 const con = mysql.createConnection({
     host: 'localhost',
@@ -7,9 +8,15 @@ const con = mysql.createConnection({
 });
 
 function authenticate(req, res) {
+    const userCredentials = {
+        username: req.body.username,
+        password: CryptoJS.AES.decrypt(req.body.password, 'ChatJS Password').toString(CryptoJS.enc.Utf8),
+    };
+    console.log('User credentials:');
+    console.log(userCredentials);
     console.log('Retrieving user...');
     console.log(req.body.username);
-    const sql = 'SELECT * FROM users WHERE username = "' + req.body.username + '";';
+    const sql = 'SELECT * FROM users WHERE username = "' + userCredentials.username + '";';
 
     con.query(sql, (err, rows) => {
         if (err) {
@@ -23,7 +30,7 @@ function authenticate(req, res) {
         } else {
             console.log('User retrieved!');
             console.log('Authenticating...');
-            if (req.body.password === rows[0].password) {
+            if (userCredentials.password === CryptoJS.AES.decrypt(rows[0].password, 'ChatJS Password').toString(CryptoJS.enc.Utf8)) {
                 console.log('User authenticated!');
                 const user = {
                     username: rows[0].username,

@@ -3,8 +3,12 @@
 
     function loginController($scope, auth) {
         $scope.login = () => {
-            console.log($scope.credentials);
-            auth.login($scope.credentials)
+            const credentials = {
+                username: $scope.username,
+                password: CryptoJS.AES.encrypt($scope.password, 'ChatJS Password').toString(),
+            };
+            console.log(credentials);
+            auth.login(credentials)
                 .then((response) => {
                     console.log(response);
                 }, (error) => {
