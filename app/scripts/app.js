@@ -1,5 +1,5 @@
 (() => {
-    const app = angular.module('chatjs', ['ngRoute', 'ngResource']);
+    const app = angular.module('chatjs', ['ngRoute', 'ngResource', 'angular-storage']);
 
     function routes($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
