@@ -4,7 +4,7 @@
     app.config(($routeProvider, $locationProvider, storeProvider) => {
         // Provider configurations
         $locationProvider.html5Mode(true);
-        storeProvider.setStore('sessionStorage');
+        storeProvider.setStore('localStorage');
 
         // App routing
         $routeProvider
