@@ -36,23 +36,21 @@
 </head>
 
 <body ng-controller="mainController">
-    <div>
-        <nav class="navbar fixed-top navbar-dark bg-dark">
-            <a class="navbar-brand" href="/">
-                <span style="color: aliceblue">Chat</span>
-                <span style="color: aqua">JS</span>
-            </a>
-            <div ng-hide="auth.isLoggedIn" class="d-flex">
-                <a class="text-white" href="/login">Log In</a>
-                <span style="color: white">&nbsp;|&nbsp;</span>
-                <a class="text-white" href="/register">Register</a>
-            </div>
-            <div ng-show="auth.isLoggedIn">
-                <button ng-click="logout()">Log out</button>
-            </div>
-        </nav>
-        <ng-view></ng-view>
-    </div>
+    <nav class="navbar fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+            <span style="color: aliceblue">Chat</span>
+            <span style="color: aqua">JS</span>
+        </a>
+        <div ng-hide="auth.isLoggedIn" class="d-flex">
+            <a class="text-white" href="/login">Log In</a>
+            <span style="color: white">&nbsp;|&nbsp;</span>
+            <a class="text-white" href="/register">Register</a>
+        </div>
+        <div ng-show="auth.isLoggedIn" class="d-flex">
+            <button class="btn btn-danger" ng-click="logout()">Log out</button>
+        </div>
+    </nav>
+    <ng-view></ng-view>
 </body>
 
 </html>
