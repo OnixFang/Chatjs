@@ -42,14 +42,14 @@
                 <span style="color: aliceblue">Chat</span>
                 <span style="color: aqua">JS</span>
             </a>
-            <div class="d-flex">
+            <div ng-hide="auth.isLoggedIn" class="d-flex">
                 <a class="text-white" href="/login">Log In</a>
                 <span style="color: white">&nbsp;|&nbsp;</span>
                 <a class="text-white" href="/register">Register</a>
-                <span style="color: white">&nbsp;|&nbsp;</span>
-                <button ng-click="logout()">{{ message }}</button>
             </div>
-            </ul>
+            <div ng-show="auth.isLoggedIn">
+                <button ng-click="logout()">Log out</button>
+            </div>
         </nav>
         <ng-view></ng-view>
     </div>

@@ -5,13 +5,17 @@
         // API variables for user data
         const users = $resource('/user');
 
-        this.isLoggedIn = false;
+        if (store.get('user')) {
+            this.isLoggedIn = true;
+        } else {
+            this.isLoggedIn = false;
+        }
 
         function getLoggedUser() {
             if (this.isLoggedIn) {
                 return store.get('user');
             }
-            return false;
+            return null;
         }
 
         function login(credentials) {
@@ -35,6 +39,7 @@
         }
 
         return {
+            isLoggedIn: this.isLoggedIn,
             login: login,
             logout: logout,
             saveUser: saveUser,
