@@ -13,9 +13,9 @@
                 controller: 'chatController',
                 resolve: {
                     user: ($location, auth) => {
-                        if (auth.authenticate()) {
+                        if (auth.isLoggedIn) {
                             console.log('Access permitted.');
-                            return auth.authenticate();
+                            return auth.getLoggedUser();
                         }
                         console.log('Access denied.');
                         return $location.path('/login');

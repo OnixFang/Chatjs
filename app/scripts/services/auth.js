@@ -1,23 +1,37 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function auth($resource, $http, store) {
+    function auth($resource, $http, $location, $window, store) {
         // API variables for user data
         const users = $resource('/user');
 
-        function authenticate() {
-            if (store.get('user') != null) {
+        if (store.get('user')) {
+            this.isLoggedIn = true;
+        } else {
+            this.isLoggedIn = false;
+        }
+
+        function getLoggedUser() {
+            if (this.isLoggedIn) {
                 return store.get('user');
             }
-            return false;
+            return null;
         }
 
         function login(credentials) {
-            return $http.post('/authenticate', credentials);
+            return $http.post('/authenticate', credentials)
+                .then((response) => {
+                    store.set('user', response.data);
+                    this.isLoggedIn = true;
+                    $location.path('/');
+                }, (error) => {
+                    $window.alert('ERROR: ' + error.data);
+                });
         }
 
         function logout() {
             store.remove('user');
+            this.isLoggedIn = false;
         }
 
         function saveUser(user) {
@@ -25,10 +39,11 @@
         }
 
         return {
+            isLoggedIn: this.isLoggedIn,
             login: login,
             logout: logout,
             saveUser: saveUser,
-            authenticate: authenticate,
+            getLoggedUser: getLoggedUser,
         };
     }
 

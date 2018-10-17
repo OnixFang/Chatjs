@@ -2,7 +2,7 @@
     const app = angular.module('chatjs');
 
     function mainController($scope, $location, auth) {
-        $scope.message = 'Logout';
+        $scope.auth = auth;
 
         $scope.logout = () => {
             auth.logout();
