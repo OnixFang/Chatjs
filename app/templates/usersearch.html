@@ -4,7 +4,7 @@
             <h4>User Search</h4>
             <div class="input-group">
                 <input type="text" placeholder="username..." class="form-control" id="username" ng-model="username"
-                    autofocus />
+                    autofocus autocomplete="off" />
                 <!-- <div class="input-group-append">
                     <button class="btn btn-outline-secondary" id="btnSearch">Search</button>
                 </div>
@@ -12,6 +12,11 @@
             </div>
         </div>
         <div class="card-body px-5">
+            <p ng-repeat="user in users | filter:username" ng-show="username">
+                <span class="font-weight-bold" ng-bind="user.username"></span>,
+                <span ng-bind="user.firstname"></span>
+                <span ng-bind="user.lastname"></span>
+            </p>
         </div>
     </div>
 </div>

@@ -81,7 +81,6 @@ function getAll(req, res) {
                 };
                 users.push(user);
             }
-            console.log(users);
             res.send(users);
         }
     });
