@@ -61,7 +61,34 @@ function save(req, res) {
     });
 }
 
+function getAll(req, res) {
+    console.log('Getting all users...');
+    const sql = 'SELECT username, firstname, lastname FROM users;';
+
+    con.query(sql, (err, rows) => {
+        if (err) {
+            console.log('ERROR GETTING USERS: ' + err.message);
+            res.status(500);
+            res.send(err.message);
+        } else {
+            console.log('Users retrieved!');
+            const users = [];
+            for (let i = 0; i < rows.length; i += 1) {
+                const user = {
+                    username: rows[i].username,
+                    firstname: rows[i].firstname,
+                    lastname: rows[i].lastname,
+                };
+                users.push(user);
+            }
+            console.log(users);
+            res.send(users);
+        }
+    });
+}
+
 module.exports = {
     authenticate: authenticate,
     save: save,
+    getAll: getAll,
 };

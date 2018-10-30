@@ -30,6 +30,10 @@
                 templateUrl: 'templates/register.html',
                 controller: 'registerController',
             })
+            .when('/usersearch', {
+                templateUrl: 'templates/usersearch.html',
+                controller: 'userSearchController',
+            })
             .when('/test', {
                 templateUrl: 'templates/test.html',
                 controller: 'testController',
