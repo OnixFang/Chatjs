@@ -10,6 +10,9 @@
 
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <script src="lib/bootstrap/jquery.slim.min.js"></script>
+    <script src="lib/bootstrap/popper.min.js"></script>
+    <script src="lib/bootstrap/bootstrap.min.js"></script>
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles/main.css">
@@ -37,23 +40,33 @@
     <script src="scripts/services/auth-http.js"></script>
 </head>
 
-<body ng-controller="mainController">
-    <nav class="navbar fixed-top navbar-dark bg-dark">
+<body ng-controller="mainController" ng-cloack>
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
             <span style="color: aliceblue">Chat</span>
             <span style="color: aqua">JS</span>
         </a>
-        <div class="d-flex">
-            <a href="/usersearch" class="text-white">User Search</a>
-        </div>
-        <div ng-hide="auth.isLoggedIn" class="d-flex">
-            <a class="text-white" href="/login">Log In</a>
-            <span style="color: white">&nbsp;|&nbsp;</span>
-            <a class="text-white" href="/register">Register</a>
-        </div>
-        <div ng-show="auth.isLoggedIn" class="d-flex">
-            <button class="btn btn-danger" ng-click="logout()">Log out</button>
-        </div>
+        <ul ng-hide="auth.isLoggedIn" class="navbar-nav ml-auto">
+            <li class="nav-item mr-2">
+                <a class="text-white" href="/login">Log In</a>
+            </li>
+            <li class="nav-item mr-2">
+                <span style="color: white">|</span>
+            </li>
+            <li class="nav-item">
+                <a class="text-white" href="/register">Register</a>
+            </li>
+        </ul>
+
+        <ul ng-show="auth.isLoggedIn" class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="btn btn-secondary text-white" data-toggle="dropdown">{{user.username}}</a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="/usersearch" class="dropdown-item">Users</a>
+                    <a href="#" ng-click="logout()" class="dropdown-item">Log out</a>
+                </div>
+            </li>
+        </ul>
     </nav>
     <ng-view></ng-view>
 </body>
