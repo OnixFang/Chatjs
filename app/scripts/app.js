@@ -8,7 +8,7 @@
 
         // App routing
         $routeProvider
-            .when('/chat', {
+            .when('/chat/:toUsername', {
                 templateUrl: 'templates/chat.html',
                 controller: 'chatController',
                 resolve: {
