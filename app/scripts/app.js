@@ -37,12 +37,22 @@
             .when('/usersearch', {
                 templateUrl: 'templates/usersearch.html',
                 controller: 'userSearchController',
+                resolve: {
+                    user: ($location, auth) => {
+                        if (auth.isLoggedIn) {
+                            console.log('Access permitted.');
+                            return auth.getLoggedUser();
+                        }
+                        console.log('Access denied.');
+                        return $location.path('/login');
+                    },
+                },
             })
             .when('/test', {
                 templateUrl: 'templates/test.html',
                 controller: 'testController',
             })
-            .otherwise('/chat', {
+            .otherwise('/usersearch', {
                 templateUrl: 'templates/chat.html',
                 controller: 'chatController',
             });
