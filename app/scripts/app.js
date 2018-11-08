@@ -12,6 +12,8 @@
                 templateUrl: 'templates/chat.html',
                 controller: 'chatController',
                 resolve: {
+                    toUser: ($route, auth) => auth.getUser($route.current.params.toUsername)
+                        .then(response => response.data),
                     user: ($location, auth) => {
                         if (auth.isLoggedIn) {
                             console.log('Access permitted.');
