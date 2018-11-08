@@ -30,6 +30,10 @@
                 templateUrl: 'templates/register.html',
                 controller: 'registerController',
             })
+            .when('/resetpassword', {
+                templateUrl: 'templates/resetpassword.html',
+                controller: 'resetPasswordController',
+            })
             .when('/usersearch', {
                 templateUrl: 'templates/usersearch.html',
                 controller: 'userSearchController',

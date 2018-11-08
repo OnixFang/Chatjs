@@ -31,6 +31,16 @@
             this.isLoggedIn = false;
         }
 
+        function resetPassword(credentials) {
+            return $http.post('/passwordreset', credentials)
+                .then((response) => {
+                    $window.alert(response.data);
+                    $location.path('/login');
+                }, (error) => {
+                    $window.alert('ERROR: ' + error.data);
+                });
+        }
+
         function saveUser(user) {
             return $http.post('/user', user)
                 .then(() => {
@@ -47,6 +57,7 @@
             isLoggedIn: this.isLoggedIn,
             login: login,
             logout: logout,
+            resetPassword: resetPassword,
             saveUser: saveUser,
             getLoggedUser: getLoggedUser,
             getAll: getAll,
