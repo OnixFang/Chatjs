@@ -1,9 +1,9 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function chatController($scope, user, $routeParams) {
+    function chatController($scope, user, toUser) {
         $scope.user = user;
-        $scope.toUsername = $routeParams.toUsername;
+        $scope.toUser = toUser;
     }
 
     app.controller('chatController', chatController);

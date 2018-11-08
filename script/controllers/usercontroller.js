@@ -106,6 +106,32 @@ function save(req, res) {
     });
 }
 
+function getUser(req, res) {
+    console.log('Getting user...');
+    const sql = 'SELECT username, firstname, lastname FROM users WHERE username="' + req.body.username + '";';
+
+    con.query(sql, (err, rows) => {
+        if (err) {
+            console.log('ERROR GETTING USER: ' + err.message);
+            res.status(500);
+            res.send(err.message);
+        } else if (rows.length < 1) {
+            console.log('No user found!');
+            res.status(500);
+            res.send('No user found!');
+        } else {
+            console.log('User retrieved!');
+            const user = {
+                username: rows[0].username,
+                firstname: rows[0].firstname,
+                lastname: rows[0].lastname,
+            };
+            res.send(user);
+            res.send();
+        }
+    });
+}
+
 function getAll(req, res) {
     console.log('Getting all users...');
     const sql = 'SELECT username, firstname, lastname FROM users;';
@@ -135,5 +161,6 @@ module.exports = {
     authenticate: authenticate,
     passwordReset: passwordReset,
     save: save,
+    getUser: getUser,
     getAll: getAll,
 };

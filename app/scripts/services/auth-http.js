@@ -49,6 +49,11 @@
                 });
         }
 
+        function getUser(username) {
+            const toUserRequest = { username: username };
+            return $http.post('/getUser', toUserRequest);
+        }
+
         function getAll() {
             return $http.post('/getAllUsers');
         }
@@ -61,6 +66,7 @@
             saveUser: saveUser,
             getLoggedUser: getLoggedUser,
             getAll: getAll,
+            getUser: getUser,
         };
     }
 
