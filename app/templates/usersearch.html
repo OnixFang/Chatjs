@@ -12,11 +12,13 @@
             </div>
         </div>
         <div class="card-body px-5">
-            <p ng-repeat="user in users | filter:username" ng-show="username">
-                <span class="font-weight-bold" ng-bind="user.username"></span>,
-                <span ng-bind="user.firstname"></span>
-                <span ng-bind="user.lastname"></span>
-            </p>
+            <div ng-repeat="user in users | filter:username" ng-show="username">
+                <a ng-href="/chat/{{user.username}}">
+                    <span class="font-weight-bold" ng-bind="user.username"></span>,
+                    <span ng-bind="user.firstname"></span>
+                    <span ng-bind="user.lastname"></span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
