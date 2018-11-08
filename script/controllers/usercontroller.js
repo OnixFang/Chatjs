@@ -7,6 +7,51 @@ const con = mysql.createConnection({
     database: 'chatjs',
 });
 
+function passwordReset(req, res) {
+    const userCredentials = {
+        username: req.body.username,
+        password: req.body.password,
+        passcode: req.body.passcode,
+    };
+    console.log('Retrieving user from database...');
+    console.log(req.body.username);
+    const sql = 'SELECT * FROM users WHERE username = "' + userCredentials.username + '";';
+    const sql2 = 'UPDATE users SET password = "' + userCredentials.password + '" WHERE username = "' + userCredentials.username + '";';
+
+    con.query(sql, (err, rows) => {
+        if (err) {
+            console.log('ERROR GETTING USER');
+            res.status(500);
+            res.send(err.message);
+        } else if (rows.length < 1) {
+            console.log('User not found!');
+            res.status(500);
+            res.send('User not found!');
+        } else {
+            console.log('User retrieved!');
+            console.log('Authenticating pass code...');
+            if (userCredentials.passcode === rows[0].passcode) {
+                console.log('Pass code authenticated!');
+                con.query(sql2, (err2) => {
+                    if (err2) {
+                        console.log('ERROR UPDATING PASSWORD: ' + err2.message);
+                        res.status(500);
+                        res.send(err2.message);
+                    } else {
+                        console.log('Password update successfull!');
+                        res.status(200);
+                        res.send('Password updated!');
+                    }
+                });
+            } else {
+                console.log('Wrong pass code!');
+                res.status(500);
+                res.send('Wrong pass code!');
+            }
+        }
+    });
+}
+
 function authenticate(req, res) {
     const userCredentials = {
         username: req.body.username,
@@ -88,6 +133,7 @@ function getAll(req, res) {
 
 module.exports = {
     authenticate: authenticate,
+    passwordReset: passwordReset,
     save: save,
     getAll: getAll,
 };

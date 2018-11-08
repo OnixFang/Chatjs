@@ -22,6 +22,7 @@ database.connect();
 // API
 app.post('/authenticate', users.authenticate);
 app.post('/user', users.save);
+app.post('/passwordreset', users.passwordReset);
 app.post('/getAllUsers', users.getAll);
 
 // Default Page

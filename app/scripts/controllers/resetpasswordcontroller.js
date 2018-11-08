@@ -5,6 +5,7 @@
         $scope.resetPassword = () => {
             const credentials = {
                 username: $scope.username,
+                password: CryptoJS.AES.encrypt($scope.password, 'ChatJS Password').toString(),
                 passcode: $scope.passcode,
             };
 

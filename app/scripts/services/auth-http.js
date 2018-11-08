@@ -32,8 +32,13 @@
         }
 
         function resetPassword(credentials) {
-            alert('yay');
-            console.log(credentials);
+            return $http.post('/passwordreset', credentials)
+                .then((response) => {
+                    $window.alert(response.data);
+                    $location.path('/login');
+                }, (error) => {
+                    $window.alert('ERROR: ' + error.data);
+                });
         }
 
         function saveUser(user) {
