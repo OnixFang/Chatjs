@@ -31,6 +31,11 @@
             this.isLoggedIn = false;
         }
 
+        function resetPassword(credentials) {
+            alert('yay');
+            console.log(credentials);
+        }
+
         function saveUser(user) {
             return $http.post('/user', user)
                 .then(() => {
@@ -47,6 +52,7 @@
             isLoggedIn: this.isLoggedIn,
             login: login,
             logout: logout,
+            resetPassword: resetPassword,
             saveUser: saveUser,
             getLoggedUser: getLoggedUser,
             getAll: getAll,
