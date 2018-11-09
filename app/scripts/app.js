@@ -8,12 +8,17 @@
 
         // App routing
         $routeProvider
-            .when('/chat/:toUsername', {
-                templateUrl: 'templates/chat.html',
+            .when('/chat/:toUsername?', {
+                templateUrl: (urlParams) => {
+                    if (urlParams.toUsername === undefined) {
+                        return 'templates/nouserchat.html';
+                    }
+                    return 'templates/chat.html';
+                },
                 controller: 'chatController',
                 resolve: {
-                    toUser: ($route, auth) => auth.getUser($route.current.params.toUsername)
-                        .then(response => response.data),
+                    toUser: ($route, $location, auth) => auth.getUser($route.current.params.toUsername)
+                        .then(response => response.data, () => $location.path('/chat')),
                     user: ($location, auth) => {
                         if (auth.isLoggedIn) {
                             console.log('Access permitted.');
@@ -27,6 +32,15 @@
             .when('/login', {
                 templateUrl: 'templates/login.html',
                 controller: 'loginController',
+                resolve: {
+                    user: ($location, auth) => {
+                        if (auth.isLoggedIn) {
+                            console.log('User already logged in.');
+                            return $location.path('/chat');
+                        }
+                        return null;
+                    },
+                },
             })
             .when('/register', {
                 templateUrl: 'templates/register.html',
@@ -54,9 +68,6 @@
                 templateUrl: 'templates/test.html',
                 controller: 'testController',
             })
-            .otherwise('/usersearch', {
-                templateUrl: 'templates/chat.html',
-                controller: 'chatController',
-            });
+            .otherwise('/chat');
     });
 })();

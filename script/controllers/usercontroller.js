@@ -16,7 +16,8 @@ function passwordReset(req, res) {
     console.log('Retrieving user from database...');
     console.log(req.body.username);
     const sql = 'SELECT * FROM users WHERE username = "' + userCredentials.username + '";';
-    const sql2 = 'UPDATE users SET password = "' + userCredentials.password + '" WHERE username = "' + userCredentials.username + '";';
+    const sql2 = 'UPDATE users SET password = "'
+        + userCredentials.password + '" WHERE username = "' + userCredentials.username + '";';
 
     con.query(sql, (err, rows) => {
         if (err) {
@@ -73,7 +74,8 @@ function authenticate(req, res) {
         } else {
             console.log('User retrieved!');
             console.log('Authenticating...');
-            if (userCredentials.password === CryptoJS.AES.decrypt(rows[0].password, 'ChatJS Password').toString(CryptoJS.enc.Utf8)) {
+            if (userCredentials.password === CryptoJS.AES.decrypt(rows[0].password, 'ChatJS Password')
+                .toString(CryptoJS.enc.Utf8)) {
                 console.log('User authenticated!');
                 const user = {
                     username: rows[0].username,
@@ -92,7 +94,9 @@ function authenticate(req, res) {
 
 function save(req, res) {
     console.log('Saving ' + req.body.username + ' in the database...');
-    const sql = "INSERT INTO users (username, password, firstname, lastname, passcode) VALUES ('" + req.body.username + "', '" + req.body.password + "', '" + req.body.firstname + "', '" + req.body.lastname + "', '" + req.body.passcode + "');";
+    const sql = "INSERT INTO users (username, password, firstname, lastname, passcode) VALUES ('"
+        + req.body.username + "', '" + req.body.password + "', '" + req.body.firstname + "', '"
+        + req.body.lastname + "', '" + req.body.passcode + "');";
 
     con.query(sql, (err) => {
         if (err) {

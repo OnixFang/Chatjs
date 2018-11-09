@@ -19,6 +19,12 @@
         "object-shorthand": [
             "error",
             "methods"
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 110
+            }
         ]
     }
 }
