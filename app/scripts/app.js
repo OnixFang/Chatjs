@@ -17,8 +17,13 @@
                 },
                 controller: 'chatController',
                 resolve: {
-                    toUser: ($route, $location, auth) => auth.getUser($route.current.params.toUsername)
-                        .then(response => response.data, () => $location.path('/chat')),
+                    toUser: ($route, $location, auth) => {
+                        if ($route.current.params.toUsername !== undefined) {
+                            auth.getUser($route.current.params.toUsername)
+                                .then(response => response.data, () => $location.path('/chat'));
+                        }
+                        return $location.path('/chat');
+                    },
                     user: ($location, auth) => {
                         if (auth.isLoggedIn) {
                             console.log('Access permitted.');
