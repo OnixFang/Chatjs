@@ -44,8 +44,10 @@
         function saveUser(user) {
             return $http.post('/user', user)
                 .then(() => {
+                    $window.alert('Register successful');
+                    $location.path('/login');
                 }, (error) => {
-                    $window.alert('ERROR: ' + error.data);
+                    $window.alert('Error registering your user: ' + error.data);
                 });
         }
 
