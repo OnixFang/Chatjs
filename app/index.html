@@ -64,7 +64,7 @@
 
         <div ng-show="auth.isLoggedIn" class="navbar-nav mx-auto w-25">
             <div class="nav-item dropdown flex-fill">
-                <input type="text" class="form-control" placeholder="User search" ng-model="search">
+                <input type="text" class="form-control" placeholder="User search" ng-model="search" ng-click="fetchUsers()">
                 <div class="dropdown-menu chatfilter" ng-show="search">
                     <a class="dropdown-item" ng-href="/chat/{{user.username}}" ng-repeat="user in users | filter:search">
                         <span class="font-weight-bold" ng-bind="user.username"></span>
