@@ -6,6 +6,10 @@
             auth.getAll().then((response) => { $scope.users = response.data; });
         };
 
+        $scope.clearSearch = () => {
+            $scope.search = '';
+        };
+
         $scope.auth = auth;
 
         $scope.user = auth.getLoggedUser();

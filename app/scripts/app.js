@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: "error" */
 (() => {
     const app = angular.module('chatjs', ['ngRoute', 'ngResource', 'angular-storage']);
 
@@ -9,27 +10,21 @@
         // App routing
         $routeProvider
             .when('/chat/:toUsername?', {
-                templateUrl: (urlParams) => {
-                    if (urlParams.toUsername === undefined) {
-                        return 'templates/nouserchat.html';
-                    }
-                    return 'templates/chat.html';
-                },
+                templateUrl: 'templates/nouserchat.html',
                 controller: 'chatController',
                 resolve: {
                     toUser: ($route, $location, auth) => {
                         if ($route.current.params.toUsername !== undefined) {
-                            auth.getUser($route.current.params.toUsername)
+                            $route.current.templateUrl = 'templates/chat.html';
+                            return auth.getUser($route.current.params.toUsername)
                                 .then(response => response.data, () => $location.path('/chat'));
                         }
-                        return $location.path('/chat');
+                        return null;
                     },
                     user: ($location, auth) => {
                         if (auth.isLoggedIn) {
-                            console.log('Access permitted.');
                             return auth.getLoggedUser();
                         }
-                        console.log('Access denied.');
                         return $location.path('/login');
                     },
                 },
@@ -40,7 +35,6 @@
                 resolve: {
                     user: ($location, auth) => {
                         if (auth.isLoggedIn) {
-                            console.log('User already logged in.');
                             return $location.path('/chat');
                         }
                         return null;
@@ -61,10 +55,8 @@
                 resolve: {
                     user: ($location, auth) => {
                         if (auth.isLoggedIn) {
-                            console.log('Access permitted.');
                             return auth.getLoggedUser();
                         }
-                        console.log('Access denied.');
                         return $location.path('/login');
                     },
                 },

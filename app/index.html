@@ -66,7 +66,7 @@
             <div class="nav-item dropdown flex-fill">
                 <input type="text" class="form-control" placeholder="User search" ng-model="search" ng-click="fetchUsers()">
                 <div class="dropdown-menu chatfilter" ng-show="search">
-                    <a class="dropdown-item" ng-href="/chat/{{user.username}}" ng-repeat="user in users | filter:search">
+                    <a class="dropdown-item" ng-href="/chat/{{user.username}}" ng-repeat="user in users | filter:search" ng-click="clearSearch()">
                         <span class="font-weight-bold" ng-bind="user.username"></span>
                         <span ng-bind="user.firstname"></span>
                         <span ng-bind="user.lastname"></span>
