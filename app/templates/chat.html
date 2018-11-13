@@ -1,11 +1,11 @@
-<div class="d-flex d-flex-row mb-2" ng-repeat="message in messages">
-    <div class="card mr-1 ml-auto">
+<div class="d-flex d-flex-row mb-2" ng-repeat="message in messages | orderBy : 'datesent'">
+    <div class="card" ng-class="message.username === user.username ? 'mr-1 ml-auto' : 'ml-1 mr-auto'">
         <div class="card-body">
             <div class="card-text">
-                {{message.body}}
+                <span ng-bind="message.body"></span>
             </div>
             <small class="card-subtitle text-muted mt-5">
-                {{message.datessent}}
+                {{message.datesent | date:"MM/dd/yyyy 'at' h:mma"}}
             </small>
         </div>
     </div>

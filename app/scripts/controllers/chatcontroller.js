@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: "error" */
 (() => {
     const app = angular.module('chatjs');
 
@@ -8,7 +9,6 @@
         messages.getConversationMessages($scope.user.username, $scope.toUser.username)
             .then((response) => {
                 $scope.messages = response.data;
-                console.log(response.data);
             }, (error) => {
                 $window.alert('ERROR: ' + error.data);
             });
