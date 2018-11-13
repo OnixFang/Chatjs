@@ -1,10 +1,12 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function mainController($scope, $location, auth) {
+    function mainController($scope, $location, $routeParams, auth) {
         $scope.fetchUsers = () => {
             auth.getAll().then((response) => { $scope.users = response.data; });
         };
+
+        $scope.routeParams = $routeParams;
 
         $scope.clearSearch = () => {
             $scope.search = '';

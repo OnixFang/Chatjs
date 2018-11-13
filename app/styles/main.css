@@ -11,3 +11,8 @@ body {
 .chatfilter {
     display: block;
 }
+
+.chatting-with {
+    position: absolute;
+    z-index: 10;
+}
