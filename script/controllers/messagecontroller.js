@@ -41,7 +41,8 @@ function getConversationMessages(req, res) {
             console.log('No FromMe messages.');
         } else {
             console.log('FromMe messages retrieved!');
-            for (let i = 0; rows.length > i; i += 1) {
+            for (let i = 0; i < rows.length; i += 1) {
+                console.log('pushing message');
                 const message = {
                     username: rows[i].transmitter_username,
                     body: rows[i].body,
@@ -59,10 +60,11 @@ function getConversationMessages(req, res) {
             res.status(500);
             res.send(err.message);
         } else if (rows.length < 1) {
-            console.log('No ToMe messages.');
+            console.log('No ToMe messages. Sending messages.');
+            res.send(messages);
         } else {
             console.log('ToMe messages retrieved!');
-            for (let i = 0; rows.length > i; i += 1) {
+            for (let i = 0; i < rows.length; i += 1) {
                 const message = {
                     username: rows[i].transmitter_username,
                     body: rows[i].body,
@@ -70,11 +72,10 @@ function getConversationMessages(req, res) {
                 };
                 messages.push(message);
             }
+            console.log('Sending messages.');
+            res.send(messages);
         }
     });
-
-    // Send an array with ALL the conversation messages
-    res.send(messages);
 }
 
 module.exports = {

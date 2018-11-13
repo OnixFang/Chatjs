@@ -1,7 +1,7 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function messages($http, $window) {
+    function messages($http) {
         function saveMessage(message) {
             return $http.post('/saveMessage', message);
         }
@@ -12,11 +12,7 @@
                 toUsername: toUsername,
             };
 
-            return $http.post('/getConversationMessages', users)
-                .then((response => response.data),
-                    (error) => {
-                        $window.alert('ERROR: ' + error.data);
-                    });
+            return $http.post('/getConversationMessages', users);
         }
 
         return {

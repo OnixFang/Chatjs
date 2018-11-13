@@ -1,9 +1,12 @@
-<div class="d-flex d-flex-row">
+<div class="d-flex d-flex-row mb-2" ng-repeat="message in messages">
     <div class="card mr-1 ml-auto">
         <div class="card-body">
             <div class="card-text">
-                Hello everybody!
+                {{message.body}}
             </div>
+            <small class="card-subtitle text-muted mt-5">
+                {{message.datessent}}
+            </small>
         </div>
     </div>
 </div>
@@ -12,8 +15,8 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex d-flex-row">
-                <textarea class="form-control" id="body" placeholder="Message..." rows="1"></textarea>
-                <button class="btn btn-success ml-4" type="button">Send</button>
+                <textarea class="form-control" rows="1" ng-model="message" placeholder="Message..."></textarea>
+                <button class="btn btn-success ml-4" type="button" ng-click="sendMessage()">Send</button>
             </div>
         </div>
     </div>
