@@ -9,7 +9,7 @@ const con = mysql.createConnection({
 function saveMessage(req, res) {
     console.log('Saving message...');
     const sql = "INSERT INTO messages (body, transmitter_username, receptor_username) VALUES ('"
-        + req.body.body + "', '" + req.body.transmitter_username + "', '" + req.body.receptor_username + "');";
+        + req.body.body + "', '" + req.body.fromUsername + "', '" + req.body.toUsername + "');";
 
     con.query(sql, (err) => {
         if (err) {
