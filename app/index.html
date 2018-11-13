@@ -52,9 +52,11 @@
                 <span style="color: aqua">JS</span>
                 <span style="color: white" ng-show="routeParams.toUsername">:</span>
             </a>
-            <span class="navbar-brand text-white" ng-show="routeParams.toUsername">Now chatting with <span style="color: aqua" ng-bind="routeParams.toUsername"></span></span>
+            <span class="navbar-brand text-white" ng-show="routeParams.toUsername">Now chatting with <span style="color: aqua"
+                    ng-bind="routeParams.toUsername"></span></span>
         </div>
 
+        <!-- Login and register links -->
         <ul ng-hide="auth.isLoggedIn" class="navbar-nav ml-auto">
             <li class="nav-item mr-2">
                 <a class="text-white" href="/login">Log In<span class="fas fa-sign-in-alt ml-2"></span></a>
@@ -67,9 +69,17 @@
             </li>
         </ul>
 
+        <!-- User search -->
         <div ng-show="auth.isLoggedIn" class="navbar-nav mx-auto w-25">
             <div class="nav-item dropdown flex-fill">
-                <input type="text" class="form-control" placeholder="User search" ng-model="search" ng-click="fetchUsers()">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fa fa-search"></span>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="User search" ng-model="search" ng-click="fetchUsers()">
+                </div>
                 <div class="dropdown-menu chatfilter" ng-show="search">
                     <a class="dropdown-item" ng-href="/chat/{{user.username}}" ng-repeat="user in users | filter:search"
                         ng-click="clearSearch()">
@@ -81,6 +91,7 @@
             </div>
         </div>
 
+        <!-- Logged user menu -->
         <ul ng-show="auth.isLoggedIn" class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
                 <a class="btn btn-secondary text-white" data-toggle="dropdown" ng-bind="user.username"></a>

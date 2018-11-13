@@ -92,7 +92,7 @@ function authenticate(req, res) {
     });
 }
 
-function save(req, res) {
+function saveUser(req, res) {
     console.log('Saving ' + req.body.username + ' in the database...');
     const sql = "INSERT INTO users (username, password, firstname, lastname, passcode) VALUES ('"
         + req.body.username + "', '" + req.body.password + "', '" + req.body.firstname + "', '"
@@ -131,7 +131,6 @@ function getUser(req, res) {
                 lastname: rows[0].lastname,
             };
             res.send(user);
-            res.send();
         }
     });
 }
@@ -164,7 +163,7 @@ function getAll(req, res) {
 module.exports = {
     authenticate: authenticate,
     passwordReset: passwordReset,
-    save: save,
+    saveUser: saveUser,
     getUser: getUser,
     getAll: getAll,
 };

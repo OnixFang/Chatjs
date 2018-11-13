@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const database = require('./controllers/chatjs-database.js');
 const users = require('./controllers/usercontroller.js');
+const messages = require('./controllers/messagecontroller.js');
 
 // Server variables
 const rootPath = path.normalize(__dirname + './../');
@@ -19,14 +20,18 @@ app.use(express.static(appDir));
 // MySQL Connection
 database.connect();
 
-// API
+// User API
 app.post('/authenticate', users.authenticate);
-app.post('/user', users.save);
+app.post('/saveUser', users.saveUser);
 app.post('/passwordreset', users.passwordReset);
 app.post('/getUser', users.getUser);
 app.post('/getAllUsers', users.getAll);
 
-// Default Page
+// Messages API
+app.post('/saveMessage', messages.saveMessage);
+app.post('/getConversationMessages', messages.getConversationMessages);
+
+// Route to AngularJS App
 app.get('*', (req, res) => {
     res.sendFile(appDir + 'index.html');
 });

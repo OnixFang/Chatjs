@@ -42,7 +42,7 @@
         }
 
         function saveUser(user) {
-            return $http.post('/user', user)
+            return $http.post('/saveUser', user)
                 .then(() => {
                     $window.alert('Register successful');
                     $location.path('/login');
