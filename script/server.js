@@ -9,7 +9,7 @@ const messages = require('./controllers/messagecontroller.js');
 // Server variables
 const rootPath = path.normalize(__dirname + './../');
 const appDir = path.normalize(rootPath + '/app/');
-const port = 80;
+const port = 8010;
 const app = express();
 
 // Express app configuration
