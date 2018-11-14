@@ -20,6 +20,7 @@
                 toUsername: $scope.toUser.username,
             };
             messages.saveMessage(message);
+            $scope.message = '';
         };
     }
 
