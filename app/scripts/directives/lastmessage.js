@@ -1,12 +1,14 @@
 (() => {
     const app = angular.module('chatjs');
 
-    function lastMessage($location, $anchorScroll) {
+    function lastMessage($location, $anchorScroll, $timeout) {
         return {
             link: (scope) => {
                 if (scope.$last) {
-                    $location.hash('bottom-of-the-page');
-                    $anchorScroll();
+                    $timeout(() => {
+                        $location.hash('bottom-of-the-page');
+                        $anchorScroll();
+                    }, 0);
                 }
             },
         };
