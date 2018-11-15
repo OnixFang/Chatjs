@@ -42,7 +42,6 @@ function getConversationMessages(req, res) {
         } else {
             console.log('FromMe messages retrieved!');
             for (let i = 0; i < rows.length; i += 1) {
-                console.log('pushing message');
                 const message = {
                     username: rows[i].transmitter_username,
                     body: rows[i].body,
