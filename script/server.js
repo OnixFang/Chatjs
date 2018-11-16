@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const socketIo = require('socket.io');
 const database = require('./controllers/chatjs-database.js');
 const users = require('./controllers/usercontroller.js');
 const messages = require('./controllers/messagecontroller.js');
@@ -37,6 +38,12 @@ app.get('*', (req, res) => {
 });
 
 // Server launch
-app.listen(port);
+const io = socketIo(app.listen(port));
 console.log('Listening on port:' + port);
 console.log('http://localhost:' + port);
+
+io.on('connect', (socket) => {
+    socket.on('chat-message', (msg) => {
+        io.emit('chat-message', msg);
+    });
+});

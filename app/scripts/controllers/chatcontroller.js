@@ -13,6 +13,18 @@
                 $window.alert('ERROR: ' + error.data);
             });
 
+        function createRoomName(...args) {
+            let roomName = '';
+
+            for (let i = 0; i < args.length; i += 1) {
+                roomName += args[i];
+                if (i !== args.length - 1) {
+                    roomName += '-';
+                }
+            }
+            return roomName;
+        }
+
         $scope.sendMessage = () => {
             const message = {
                 body: $scope.message,
