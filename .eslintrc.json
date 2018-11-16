@@ -2,7 +2,8 @@
     "extends": "airbnb-base",
     "globals": {
         "angular": true,
-        "CryptoJS": true
+        "CryptoJS": true,
+        "io": true
     },
     "rules": {
         "no-console": 0,

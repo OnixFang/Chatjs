@@ -8,8 +8,12 @@ const con = mysql.createConnection({
 
 function saveMessage(req, res) {
     console.log('Saving message...');
-    const sql = "INSERT INTO messages (body, transmitter_username, receptor_username) VALUES ('"
-        + req.body.body + "', '" + req.body.fromUsername + "', '" + req.body.toUsername + "');";
+    const date = new Date();
+    const isoDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
+    console.log(date);
+    const sql = "INSERT INTO messages (body, datesent, transmitter_username, receptor_username) VALUES ('"
+        + req.body.body + "', '" + isoDate.slice(0, 19).replace('T', ' ') + "', '" + req.body.fromUsername
+        + "', '" + req.body.toUsername + "');";
 
     con.query(sql, (err) => {
         if (err) {
@@ -21,6 +25,31 @@ function saveMessage(req, res) {
             res.send();
         }
     });
+}
+
+function socketSaveMessage(msg) {
+    console.log('Saving message...');
+    const date = new Date();
+    const isoDate = (new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString())
+        .slice(0, 19).replace('T', ' ');
+
+    const message = {
+        username: msg.fromUsername,
+        body: msg.body,
+        datesent: date,
+        toUsername: msg.toUsername,
+    };
+    const sql = "INSERT INTO messages (body, datesent, transmitter_username, receptor_username) VALUES ('"
+        + message.body + "', '" + isoDate + "', '" + message.username + "', '" + message.toUsername + "');";
+
+    con.query(sql, (err) => {
+        if (err) {
+            console.log('ERROR SAVING MESSAGE: ' + err.message);
+        } else {
+            console.log('Message saved successfully.');
+        }
+    });
+    return message;
 }
 
 function getConversationMessages(req, res) {
@@ -42,7 +71,6 @@ function getConversationMessages(req, res) {
         } else {
             console.log('FromMe messages retrieved!');
             for (let i = 0; i < rows.length; i += 1) {
-                console.log('pushing message');
                 const message = {
                     username: rows[i].transmitter_username,
                     body: rows[i].body,
@@ -80,5 +108,6 @@ function getConversationMessages(req, res) {
 
 module.exports = {
     saveMessage: saveMessage,
+    socketSaveMessage: socketSaveMessage,
     getConversationMessages: getConversationMessages,
 };

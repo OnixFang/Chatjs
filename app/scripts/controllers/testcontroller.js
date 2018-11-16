@@ -2,12 +2,19 @@
     const app = angular.module('chatjs');
 
     function testController($scope) {
-        $scope.test = () => {
-            $scope.output = CryptoJS.AES.encrypt($scope.testinput, 'ChatJS Password');
-        };
+        const socket = io();
+        $scope.messages = [];
 
-        $scope.test2 = () => {
-            $scope.output2 = CryptoJS.AES.decrypt($scope.output, 'ChatJS Password').toString(CryptoJS.enc.Utf8);
+        socket.on('test-message', (msg) => {
+            $scope.$apply(() => {
+                console.log('Message from socket: ' + msg);
+                $scope.messages.push(msg);
+            });
+        });
+
+        $scope.sendMessage = () => {
+            socket.emit('test-message', $scope.message);
+            $scope.message = '';
         };
     }
 
