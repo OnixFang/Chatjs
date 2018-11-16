@@ -44,6 +44,13 @@ console.log('http://localhost:' + port);
 
 io.on('connect', (socket) => {
     socket.on('chat-message', (msg) => {
-        io.emit('chat-message', msg);
+        io.emit(msg.eventName, msg);
     });
 });
+
+// Test code
+// io.on('connect', (socket) => {
+//     socket.on('test-message', (msg) => {
+//         io.emit('test-message', msg);
+//     });
+// });

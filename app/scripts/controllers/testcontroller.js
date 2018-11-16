@@ -5,7 +5,7 @@
         const socket = io();
         $scope.messages = [];
 
-        socket.on('chat-message', (msg) => {
+        socket.on('test-message', (msg) => {
             $scope.$apply(() => {
                 console.log('Message from socket: ' + msg);
                 $scope.messages.push(msg);
@@ -13,7 +13,7 @@
         });
 
         $scope.sendMessage = () => {
-            socket.emit('chat-message', $scope.message);
+            socket.emit('test-message', $scope.message);
             $scope.message = '';
         };
     }
