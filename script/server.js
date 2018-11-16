@@ -43,8 +43,10 @@ console.log('Listening on port:' + port);
 console.log('http://localhost:' + port);
 
 io.on('connect', (socket) => {
+    console.log('A user connected.');
     socket.on('chat-message', (msg) => {
-        io.emit(msg.eventName, msg);
+        console.log(msg.fromUsername + ' sending message to: ' + msg.toUsername);
+        io.emit(msg.eventName, messages.socketSaveMessage(msg));
     });
 });
 

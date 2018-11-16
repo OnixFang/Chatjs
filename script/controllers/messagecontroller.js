@@ -27,6 +27,31 @@ function saveMessage(req, res) {
     });
 }
 
+function socketSaveMessage(msg) {
+    console.log('Saving message...');
+    const date = new Date();
+    const isoDate = (new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString())
+        .slice(0, 19).replace('T', ' ');
+
+    const message = {
+        username: msg.fromUsername,
+        body: msg.body,
+        datesent: date,
+        toUsername: msg.toUsername,
+    };
+    const sql = "INSERT INTO messages (body, datesent, transmitter_username, receptor_username) VALUES ('"
+        + message.body + "', '" + isoDate + "', '" + message.username + "', '" + message.toUsername + "');";
+
+    con.query(sql, (err) => {
+        if (err) {
+            console.log('ERROR SAVING MESSAGE: ' + err.message);
+        } else {
+            console.log('Message saved successfully.');
+        }
+    });
+    return message;
+}
+
 function getConversationMessages(req, res) {
     console.log('Getting conversation messages...');
     const sqlFromMeMessages = 'SELECT transmitter_username, body, datesent FROM messages WHERE transmitter_username="'
@@ -83,5 +108,6 @@ function getConversationMessages(req, res) {
 
 module.exports = {
     saveMessage: saveMessage,
+    socketSaveMessage: socketSaveMessage,
     getConversationMessages: getConversationMessages,
 };
