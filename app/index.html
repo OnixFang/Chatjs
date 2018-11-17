@@ -87,34 +87,32 @@
             </div>
         </div>
 
+        <!-- Saved for when "Mobile ready" starts
+            <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
 
+        <!-- Login and register links -->
+        <ul ng-hide="auth.isLoggedIn" class="navbar-nav ml-auto">
+            <li class="nav-item mr-2">
+                <a class="text-white" href="/login">Log In<span class="fas fa-sign-in-alt ml-2"></span></a>
+            </li>
+            <li class="nav-item mr-2">
+                <span style="color: white">|</span>
+            </li>
+            <li class="nav-item">
+                <a class="text-white" href="/register">Register<span class="fas fa-user-plus ml-2"></span></a>
+            </li>
+        </ul>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Login and register links -->
-            <ul ng-hide="auth.isLoggedIn" class="navbar-nav ml-auto">
-                <li class="nav-item mr-2">
-                    <a class="text-white" href="/login">Log In<span class="fas fa-sign-in-alt ml-2"></span></a>
-                </li>
-                <li class="nav-item mr-2">
-                    <span style="color: white">|</span>
-                </li>
-                <li class="nav-item">
-                    <a class="text-white" href="/register">Register<span class="fas fa-user-plus ml-2"></span></a>
-                </li>
-            </ul>
-
-            <!-- Logged user menu -->
-            <ul ng-show="auth.isLoggedIn" class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="btn btn-secondary text-white" data-toggle="dropdown" ng-bind="user.username"></a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#" ng-click="logout()" class="dropdown-item">Log out<span class="fas fa-sign-out-alt ml-2"></span></a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-
+        <!-- Logged user menu -->
+        <ul ng-show="auth.isLoggedIn" class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="btn btn-secondary text-white" data-toggle="dropdown" ng-bind="user.username"></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="#" ng-click="logout()" class="dropdown-item">Log out<span class="fas fa-sign-out-alt ml-2"></span></a>
+                </div>
+            </li>
+        </ul>
+        <!-- </div> -->
     </nav>
     <ng-view></ng-view>
 </body>

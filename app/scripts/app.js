@@ -11,11 +11,11 @@
         $routeProvider
             .when('/chat/:toUsername?', {
                 templateUrl: 'templates/nouserchat.html',
-                controller: 'chatController',
                 resolve: {
                     toUser: ($route, $location, auth) => {
                         if ($route.current.params.toUsername !== undefined) {
                             $route.current.templateUrl = 'templates/chat.html';
+                            $route.current.controller = 'chatController';
                             return auth.getUser($route.current.params.toUsername)
                                 .then(response => response.data, () => $location.path('/chat'));
                         }
