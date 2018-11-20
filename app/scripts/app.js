@@ -49,17 +49,8 @@
                 templateUrl: 'templates/resetpassword.html',
                 controller: 'resetPasswordController',
             })
-            .when('/usersearch', {
-                templateUrl: 'templates/usersearch.html',
-                controller: 'userSearchController',
-                resolve: {
-                    user: ($location, auth) => {
-                        if (auth.isLoggedIn) {
-                            return auth.getLoggedUser();
-                        }
-                        return $location.path('/login');
-                    },
-                },
+            .when('/about', {
+                templateUrl: 'templates/about.html',
             })
             .when('/test', {
                 templateUrl: 'templates/test.html',

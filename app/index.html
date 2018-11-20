@@ -55,7 +55,6 @@
             <a class="navbar-brand" href="/">
                 <span style="color: aliceblue">Chat</span>
                 <span style="color: aqua">JS</span>
-                <span style="color: white" ng-show="routeParams.toUsername">:</span>
             </a>
             <span class="navbar-brand text-white" ng-show="routeParams.toUsername">Now chatting with <span style="color: aqua"
                     ng-bind="routeParams.toUsername"></span></span>
@@ -93,13 +92,19 @@
         <!-- Login and register links -->
         <ul ng-hide="auth.isLoggedIn" class="navbar-nav ml-auto">
             <li class="nav-item mr-2">
-                <a class="text-white" href="/login">Log In<span class="fas fa-sign-in-alt ml-2"></span></a>
+                <a class="text-white" href="/about"><span class="fas fa-info-circle mr-2"></span>About</a>
             </li>
             <li class="nav-item mr-2">
                 <span style="color: white">|</span>
             </li>
-            <li class="nav-item">
-                <a class="text-white" href="/register">Register<span class="fas fa-user-plus ml-2"></span></a>
+            <li class="nav-item mr-2">
+                <a class="text-white" href="/login"><span class="fas fa-sign-in-alt mr-2"></span>Log In</a>
+            </li>
+            <li class="nav-item mr-2">
+                <span style="color: white">|</span>
+            </li>
+            <li class="nav-item mr-2">
+                <a class="text-white" href="/register"><span class="fas fa-user-plus mr-2"></span>Register</a>
             </li>
         </ul>
 
@@ -108,7 +113,8 @@
             <li class="nav-item dropdown">
                 <a class="btn btn-secondary text-white" data-toggle="dropdown" ng-bind="user.username"></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="#" ng-click="logout()" class="dropdown-item">Log out<span class="fas fa-sign-out-alt ml-2"></span></a>
+                    <a class="dropdown-item" href="#" ng-click="logout()"><span class="fas fa-sign-out-alt mr-2"></span>Log out</a>
+                    <a class="dropdown-item" href="/about"><span class="fas fa-info-circle mr-2"></span>About</a>
                 </div>
             </li>
         </ul>
